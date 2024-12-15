@@ -29,3 +29,6 @@ steps:
 
 images:
 - 'us-central1-docker.pkg.dev/codebuild-444613/my-repo/my-app'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
