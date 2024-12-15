@@ -15,5 +15,6 @@ spec:
       containers:
       - name: my-app
         image: us-central1-docker.pkg.dev/codebuild-444613/my-repo/my-app
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
