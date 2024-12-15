@@ -1,141 +1,145 @@
 <?php
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Ahmad</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <script type="text/javascript">
+<head>
+  <title>Ahmad</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-      google.charts.load('current', {'packages':['gauge', 'corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawChart);
+  <script type="text/javascript">
 
-      function drawChart() {
+    google.charts.load('current', { 'packages': ['gauge', 'corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-        // Gauge
-        var data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['Output', 80]
-        ]);
+    function drawChart() {
 
-        var options = {
-          width: 200, height: 200,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
-          minorTicks: 5
-        };
+      // Gauge
+      var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['Output', 80]
+      ]);
 
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+      var options = {
+        width: 200, height: 200,
+        redFrom: 90, redTo: 100,
+        yellowFrom: 75, yellowTo: 90,
+        minorTicks: 5
+      };
 
-        chart.draw(data, options);
+      var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 
-        // Process waterfall
-        var data2 = google.visualization.arrayToDataTable([
-            ['Extrude', 0, 0, 20, 20],
-            ['Cut', 20, 20, 40, 40],
-            ['Weld', 40, 40, 60, 60],
-            ['Polish', 60, 60, 80, 80],
-            ['Package', 80, 80, 100, 100]
-          ], true);
+      chart.draw(data, options);
 
-        var options2 = {
-          legend:'none',
-          backgroundColor:'#eee',
-          colors:['#9e579c'],
-          bar: { groupWidth: '100%' },
-          animation: {duration: 200 }
-        }
+      // Process waterfall
+      var data2 = google.visualization.arrayToDataTable([
+        ['Extrude', 0, 0, 20, 20],
+        ['Cut', 20, 20, 40, 40],
+        ['Weld', 40, 40, 60, 60],
+        ['Polish', 60, 60, 80, 80],
+        ['Package', 80, 80, 100, 100]
+      ], true);
 
-        var chart2 = new google.visualization.CandlestickChart(document.getElementById('chart2_div'));
-
-        chart2.draw(data2, options2);
-
-        // Shipping chart
-        var data3 = google.visualization.arrayToDataTable([
-          ['Queue', 'Quantity'],
-          ['1', 0],
-          ['2', 0],
-          ['3', 0],
-          ['4', 0],
-          ['5', 0],
-          ['6', 0],
-          ['7', 0],
-          ['8', 0],
-          ['9', 20]
-          ]);
-
-        var options3 = {
-          chart:{title: 'Shipping Throughput'},
-          backgroundColor:'#eee',
-          legend:{position:'none'},
-          vAxis: {viewWindow:{max:40}},
-          bar: {groupWidth: "95%"},
-          width: 300
-        };
-
-        var chart3 = new google.charts.Bar(document.getElementById('chart3_div'));
-        chart3.draw(data3, google.charts.Bar.convertOptions(options3));
-
-
-        setInterval(function() {
-          new_value = data.getValue(0, 1) - 5 + Math.floor(10 * Math.random());
-          new_value = (new_value > 5) ? ((new_value < 100) ? new_value : 100) : 5;
-          data.setValue(0, 1, new_value);
-          chart.draw(data, options);
-        }, 2300);
-
-        setInterval(function() {
-          element = Math.floor(4 * Math.random()) + 1
-          new_value = element * 20 - 5 + Math.floor(10 * Math.random())
-          data2.setValue(element - 1, 3, new_value)
-          data2.setValue(element - 1, 4, new_value)
-          data2.setValue(element,     1, new_value)
-          data2.setValue(element,     2, new_value)
-          chart2.draw(data2, options2);
-        }, 1000);
-
-        setInterval(function() {
-          data3.setValue(0, 1, data3.getValue(1, 1))
-          data3.setValue(1, 1, data3.getValue(2, 1))
-          data3.setValue(2, 1, data3.getValue(3, 1))
-          data3.setValue(3, 1, data3.getValue(4, 1))
-          data3.setValue(4, 1, data3.getValue(5, 1))
-          data3.setValue(5, 1, data3.getValue(6, 1))
-          data3.setValue(6, 1, data3.getValue(7, 1))
-          data3.setValue(7, 1, data3.getValue(8, 1))
-          new_value = data3.getValue(8, 1) - 5 + Math.floor(10 * Math.random());
-          new_value = (new_value > 5) ? ((new_value < 40) ? new_value : 40) : 5;
-          data3.setValue(8, 1, new_value)
-          chart3.draw(data3, google.charts.Bar.convertOptions(options3));
-        }, 2500);
-
+      var options2 = {
+        legend: 'none',
+        backgroundColor: '#eee',
+        colors: ['#9e579c'],
+        bar: { groupWidth: '100%' },
+        animation: { duration: 200 }
       }
-    </script>
-  
-  </head>
 
-  <body>
-    <div class="container">
+      var chart2 = new google.visualization.CandlestickChart(document.getElementById('chart2_div'));
 
-  	  <div class="row">
-  	    <div class="col-md-12">
-          <nav class="navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="/"><i class="fas fa-industry"></i> Widget Manufacturing Dashboards</a>
-        </div>
-          </nav>
-  
-          <div class="jumbotron" style="height:300px">
-            <!-- <div id="chart_div"  style="width: 200px; height: 200px; float: left;"></div> -->
-            <div id="chart2_div" style="width: 400px; height: 200px; float: left;"></div>
-            
-            <div id="chart3_div" style="width: 400px; height: 200px; float: left;"></div>
+      chart2.draw(data2, options2);
+
+      // Shipping chart
+      var data3 = google.visualization.arrayToDataTable([
+        ['Queue', 'Quantity'],
+        ['1', 0],
+        ['2', 0],
+        ['3', 0],
+        ['4', 0],
+        ['5', 0],
+        ['6', 0],
+        ['7', 0],
+        ['8', 0],
+        ['9', 20]
+      ]);
+
+      var options3 = {
+        chart: { title: 'Shipping Throughput' },
+        backgroundColor: '#eee',
+        legend: { position: 'none' },
+        vAxis: { viewWindow: { max: 40 } },
+        bar: { groupWidth: "95%" },
+        width: 300
+      };
+
+      var chart3 = new google.charts.Bar(document.getElementById('chart3_div'));
+      chart3.draw(data3, google.charts.Bar.convertOptions(options3));
+
+
+      setInterval(function () {
+        new_value = data.getValue(0, 1) - 5 + Math.floor(10 * Math.random());
+        new_value = (new_value > 5) ? ((new_value < 100) ? new_value : 100) : 5;
+        data.setValue(0, 1, new_value);
+        chart.draw(data, options);
+      }, 2300);
+
+      setInterval(function () {
+        element = Math.floor(4 * Math.random()) + 1
+        new_value = element * 20 - 5 + Math.floor(10 * Math.random())
+        data2.setValue(element - 1, 3, new_value)
+        data2.setValue(element - 1, 4, new_value)
+        data2.setValue(element, 1, new_value)
+        data2.setValue(element, 2, new_value)
+        chart2.draw(data2, options2);
+      }, 1000);
+
+      setInterval(function () {
+        data3.setValue(0, 1, data3.getValue(1, 1))
+        data3.setValue(1, 1, data3.getValue(2, 1))
+        data3.setValue(2, 1, data3.getValue(3, 1))
+        data3.setValue(3, 1, data3.getValue(4, 1))
+        data3.setValue(4, 1, data3.getValue(5, 1))
+        data3.setValue(5, 1, data3.getValue(6, 1))
+        data3.setValue(6, 1, data3.getValue(7, 1))
+        data3.setValue(7, 1, data3.getValue(8, 1))
+        new_value = data3.getValue(8, 1) - 5 + Math.floor(10 * Math.random());
+        new_value = (new_value > 5) ? ((new_value < 40) ? new_value : 40) : 5;
+        data3.setValue(8, 1, new_value)
+        chart3.draw(data3, google.charts.Bar.convertOptions(options3));
+      }, 2500);
+
+    }
+  </script>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><i class="fas fa-industry"></i> Widget Manufacturing Dashboard</a>
           </div>
+        </nav>
+
+        <div class="jumbotron" style="height:300px">
+          <div id="chart_div" style="width: 200px; height: 200px; float: left;"></div>
+          <div id="chart2_div" style="width: 400px; height: 200px; float: left;"></div>
+
+          <div id="chart3_div" style="width: 400px; height: 200px; float: left;"></div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
